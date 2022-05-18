@@ -60,7 +60,7 @@ fn try_main() -> io::Result<i32> {
 
     let port = port.parse().map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "connection port must be numeric"))?;
 
-    let gateway = igd::search_gateway()
+    let gateway = igd::search_gateway(igd::SearchOptions::default())
         .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
 
     let address = if_for_addr(*gateway.addr.ip())?;
